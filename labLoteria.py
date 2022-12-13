@@ -2,7 +2,7 @@ from random import randint
 import psycopg2
 import csv
 
-with open(C:\Users\stive\Downloads)
+with open('Pick_3')
 
 conexion=psycopg2.connect(user = 'siqrdvrm',password ='CBRDwebn0tVojx1sSOw_PhAvSsfOWw4_',host ='queenie.db.elephantsql.com',port= '5432',database = 'siqrdvrm')
 
