@@ -6,7 +6,10 @@ conexion=psycopg2.connect(user = 'siqrdvrm',password ='CBRDwebn0tVojx1sSOw_PhAvS
 
 def insertar(fecha,numganadorDia,numganadorNoche):
     cursor = conexion.cursor()
-    sql = f'INSERT INTO loterias values(current_date,{numganadorDia},{numganadorNoche})'
+    if numganadorDia!=None:
+        sql = f'INSERT INTO loterias values({fecha},{numganadorDia},{numganadorNoche})'
+    else:
+        sql=f'insert into loterias(fecha,resul_noche) values({fecha},{numganadorNoche})' 
     cursor.execute(sql)
     conexion.commit()
 
@@ -14,10 +17,14 @@ with open('Pick_3.csv') as h:
     reader=csv.reader(h)
     n = 1
     for row in reader:
-        sleep(0.1)
         print(n,row[1],row[2])
         n=n+1
-        insertar(f'{row[0]}',row[1],row[2])
+        if row[1]=="":
+            insertar("'"+row[0]+"'",None,row[2])
+        else:
+            insertar("'"+row[0]+"'",row[1],row[2])
+
+        
 #registro = cursor.fetchall()
 #print(registro)
 # def crearMatriz():
